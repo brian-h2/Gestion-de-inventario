@@ -5,9 +5,16 @@ namespace ApiMinimal.Context
 {
     public class ApiMinimalContext : DbContext
     {
-        public DbSet<Category> Categories { get; set; }
-        public DbSet<Task> Tasks { get; set; }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Tasks>()
+                .HasKey(t => t.IdTask);
 
-        public ApiMinimalContext(DbContextOptions<ApiMinimalContext> options) : base (options) { }
+            
+        }
+        public DbSet<Tasks> Tasks { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public ApiMinimalContext(DbContextOptions<ApiMinimalContext> options) : base (options) 
+        { }
     }
 }

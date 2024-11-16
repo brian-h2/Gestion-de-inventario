@@ -1,9 +1,16 @@
-﻿namespace ApiMinimal.Models
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace ApiMinimal.Models
 {
+    [Table("Tasks")]
     public class Tasks
     {
-        public Guid TaskID { get; set; }
+        [Key]
+        public Guid IdTask { get; set; }
 
+        [Required]
+        [MaxLength(200)]
         public string? TaskName { get; set; }
 
         public string? Description { get; set; }
@@ -12,11 +19,14 @@
 
         public DateTime DateCreation { get; set; }
 
-        /*Relacion con category*/ 
+        /*Relacion con category*/
 
+        [ForeignKey("CategoriaID")] 
         public Guid CategoryID { get; set; } //Llave Foranea
-
         public virtual Category Category { get; set; } //
+
+        [NotMapped]//En momento que se haga el mapeo de nuestro contexto, se omita este atributo
+        public string Resum {  get; set; } //Resume un valor extenso
 
     }
 
