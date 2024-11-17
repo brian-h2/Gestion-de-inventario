@@ -17,8 +17,19 @@ namespace ApiMinimal.Context
                 category.Property(t => t.Description);  
             });
 
-            modelBuilder.Entity<Tasks>()
-                .HasKey(t => t.IdTask);
+            modelBuilder.Entity<Tasks>(task =>
+            {
+                task.ToTable("Tareas");
+                task.HasKey(t => t.CategoryID);
+
+                task.Property(t => t.TaskName).IsRequired().HasMaxLength(200);
+
+                task.Property(t => t.Description);
+
+                task.Property(t => t.DateCreation);
+
+                
+            });
 
             
         }
