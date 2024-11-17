@@ -31,6 +31,7 @@ namespace ApiMinimal.Models
     }
 
     /*Propiedad de prioridad*, permite asignar el nivel de prioridad para cada tarea*/
+    /*En base de datos va a determinar tambien un valor en base a la prioridad*/
 
     public enum Priority
     {

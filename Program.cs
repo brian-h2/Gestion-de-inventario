@@ -4,7 +4,8 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDbContext<ApiMinimalContext>(opt => opt.UseInMemoryDatabase("TareasDB"));
+//builder.Services.AddDbContext<ApiMinimalContext>(opt => opt.UseInMemoryDatabase("TareasDB"));
+builder.Services.AddSqlServer<ApiMinimalContext>(builder.Configuration.GetConnectionString("cnTasks")); //Obtenemos la string de conexion colocada en appsettings.json
 
 var app = builder.Build();
 
