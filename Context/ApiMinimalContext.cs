@@ -7,12 +7,14 @@ namespace ApiMinimal.Context
     {
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            List<Category> categoriesInit = new List<Category>();
-            categoriesInit.Add(new Category() { CategoryID = Guid.Parse("f4dd7e80-b991-4992-8207-fdf90ac21b8b"), Name = "Limpiar casa", Wheight = 20 });
-            categoriesInit.Add(new Category() { CategoryID = Guid.Parse("f4dd7e80-b991-4992-8207-fdf90ac21b02"), Name = "Acomodar la cama", Wheight = 40 });
 
             modelBuilder.Entity<Category>(category =>
             {
+                category.HasData(
+                    new Category { CategoryID = Guid.Parse("f4dd7e80-b991-4992-8207-fdf90ac21b8b"), Name = "Limpieza", Wheight = 20 },
+                    new Category { CategoryID = Guid.Parse("f4dd7e80-b991-4992-8207-fdf90ac21b02"), Name = "Trabajo", Wheight = 40 }
+                );
+
                 category.ToTable("Categoria"); //Especificamos nombre de tabla
                 category.HasKey(t => t.CategoryID); //Especificamos clave principal
 
@@ -23,11 +25,12 @@ namespace ApiMinimal.Context
                 category.Property(t => t.Wheight);
             });
 
-            List<Tasks> tasksInit = new List<Tasks>();
-            
-
             modelBuilder.Entity<Tasks>(task =>
             {
+                task.HasData(
+                    new Tasks { IdTask = Guid.Parse("f5601b55-2076-4b30-91d0-ecbb6648d0af"), TaskName = "Limpiar la casa", PriorityTask = Priority.Low, CategoryID = Guid.Parse("f4dd7e80-b991-4992-8207-fdf90ac21b8b") },
+                    new Tasks { IdTask = Guid.Parse("f5601b55-2076-4b30-91d0-ecbb6648d099"), TaskName = "Arreglar bug en azure", PriorityTask = Priority.High, CategoryID = Guid.Parse("f4dd7e80-b991-4992-8207-fdf90ac21b02") }
+                );
                 task.ToTable("Tareas");
                 task.HasKey(t => t.IdTask);
 

@@ -4,6 +4,7 @@ using ApiMinimal.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ApiMinimal.Migrations
 {
     [DbContext(typeof(ApiMinimalContext))]
-    partial class ApiMinimalContextModelSnapshot : ModelSnapshot
+    [Migration("20241118191008_RecfactorDatesCategory")]
+    partial class RecfactorDatesCategory
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -90,26 +93,6 @@ namespace ApiMinimal.Migrations
                     b.HasIndex("CategoryID");
 
                     b.ToTable("Tareas", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            IdTask = new Guid("f5601b55-2076-4b30-91d0-ecbb6648d0af"),
-                            CategoryID = new Guid("f4dd7e80-b991-4992-8207-fdf90ac21b8b"),
-                            DateCreation = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DurationTask = 0,
-                            PriorityTask = 0,
-                            TaskName = "Limpiar la casa"
-                        },
-                        new
-                        {
-                            IdTask = new Guid("f5601b55-2076-4b30-91d0-ecbb6648d099"),
-                            CategoryID = new Guid("f4dd7e80-b991-4992-8207-fdf90ac21b02"),
-                            DateCreation = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DurationTask = 0,
-                            PriorityTask = 2,
-                            TaskName = "Arreglar bug en azure"
-                        });
                 });
 
             modelBuilder.Entity("ApiMinimal.Models.Tasks", b =>
