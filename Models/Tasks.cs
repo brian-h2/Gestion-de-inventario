@@ -6,11 +6,11 @@ namespace ApiMinimal.Models
     [Table("Tasks")]
     public class Tasks
     {
-        [Key]
+        //[Key]
         public Guid IdTask { get; set; }
 
-        [Required]
-        [MaxLength(200)]
+        //[Required]
+        //[MaxLength(200)]
         public string? TaskName { get; set; }
 
         public string? Description { get; set; }
@@ -19,9 +19,11 @@ namespace ApiMinimal.Models
 
         public DateTime DateCreation { get; set; }
 
+        public int DurationTask { get; set; }
+
         /*Relacion con category*/
 
-        [ForeignKey("CategoriaID")] 
+        //[ForeignKey("CategoriaID")] 
         public Guid CategoryID { get; set; } //Llave Foranea
         public virtual Category Category { get; set; } //
 

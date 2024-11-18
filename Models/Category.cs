@@ -11,6 +11,8 @@ namespace ApiMinimal.Models
         //[MaxLength(150)]
         public string? Name { get; set; }
         public string? Description { get; set; }
+
+        public int Wheight { get; set; }
         public virtual ICollection<Tasks> Tasks { get; set; }
 
     }
