@@ -1,3 +1,19 @@
 GET http://localhost:5279/dbconexion
 
+###
+
+GET http://localhost:5279/itemsAll
+
+###
+
+POST http://localhost:5279/createTask
+Content-Type: application/json
+{
+  "IdTask":"132fdfb7-a245-42b2-9053-5e20b2a92062",
+  "PriorityTask": 0,
+  "TaskName": "Cuidar zaira",
+  "CategoryID": "f4dd7e80-b991-4992-8207-fdf90ac21b02"
+}
+
+
 
