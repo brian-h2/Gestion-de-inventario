@@ -2,7 +2,11 @@ GET http://localhost:5279/dbconexion
 
 ###
 
-GET http://localhost:5279/itemsAll
+GET http://localhost:5279/tasksAll
+
+###
+
+GET https://localhost:7174/Limpiar%20la%20casa
 
 ###
 
@@ -13,6 +17,15 @@ Content-Type: application/json
   "PriorityTask": 0,
   "TaskName": "Cuidar zaira",
   "CategoryID": "f4dd7e80-b991-4992-8207-fdf90ac21b02"
+}
+
+### 
+
+PATCH https://localhost:7174/modifiedTask/Limpiar%20la%20casa
+Content-Type: application/json
+{
+  "PriorityTask": 0,
+  "TaskName": "Cuidar zaira"
 }
 
 

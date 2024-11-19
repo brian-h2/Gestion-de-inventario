@@ -20,24 +20,38 @@ app.MapGet("/dbconexion", async ([FromServices] ApiMinimalContext dbContext) =>
     return Results.Ok("Database in memory" + dbContext.Database.IsInMemory());
 });
 
-app.MapGet("/itemsAll", async (ApiMinimalContext apidb) =>
+app.MapGet("/tasksAll", async (ApiMinimalContext apidb) =>
 {
     var items = await apidb.Tasks.ToListAsync();
     return Results.Ok(items);
-});
-
-app.MapPost("/createTask", async (Tasks task, ApiMinimalContext dbcontext) =>
-{
-    dbcontext.Tasks.Add(task);
-    await dbcontext.SaveChangesAsync();
-    return Results.Created($"/tasks/{task.IdTask}", task);
-
 });
 
 app.MapGet("/{name}", async (string name, ApiMinimalContext apidb) =>
 {
     var itemsResult = await apidb.Tasks.FirstOrDefaultAsync(x => x.TaskName == name);
     return Results.Ok(itemsResult);
+});
+
+app.MapPost("/createTask", async (Tasks task, ApiMinimalContext apidb) =>
+{
+    apidb.Tasks.Add(task);
+    await apidb.SaveChangesAsync();
+    return Results.Created("Tarea creada correctamente", task);
+
+});
+
+app.MapPatch("/modifiedTask/{name}", async (Tasks tasks,string name, ApiMinimalContext apidb) =>
+{
+    var itemsResult = await apidb.Tasks.FirstOrDefaultAsync(x => x.TaskName == name);
+    if(itemsResult != null)
+    {
+        itemsResult.IdTask = tasks.IdTask;
+        itemsResult.TaskName = tasks.TaskName;
+        itemsResult.PriorityTask = tasks.PriorityTask;
+        apidb.Tasks.Add(itemsResult);
+        await apidb.SaveChangesAsync();
+    }
+    return Results.Ok("Tarea modificada correctamente" + itemsResult);
 });
 
 
