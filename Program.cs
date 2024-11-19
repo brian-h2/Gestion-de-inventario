@@ -2,6 +2,7 @@ using ApiMinimal.Context;
 using ApiMinimal.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,7 +27,7 @@ app.MapGet("/tasksAll", async (ApiMinimalContext apidb) =>
     return Results.Ok(items);
 });
 
-app.MapGet("/{name}", async (string name, ApiMinimalContext apidb) =>
+app.MapGet("/getTask/{name}", async (string name, ApiMinimalContext apidb) =>
 {
     var itemsResult = await apidb.Tasks.FirstOrDefaultAsync(x => x.TaskName == name);
     return Results.Ok(itemsResult);
@@ -54,6 +55,15 @@ app.MapPatch("/modifiedTask/{name}", async (Tasks tasks,string name, ApiMinimalC
     return Results.Ok("Tarea modificada correctamente" + itemsResult);
 });
 
-
+app.MapDelete("/deleteTask/{name}", async (string name, ApiMinimalContext apidb) =>
+{
+    var itemResult = await apidb.Tasks.FirstOrDefaultAsync(x => x.TaskName == name);
+    if (itemResult != null) 
+    {
+        apidb.Remove(itemResult);
+        await apidb.SaveChangesAsync();
+    }
+    return Results.Ok("Tarea eliminada correctamente " + itemResult.TaskName);
+});
 
 app.Run();

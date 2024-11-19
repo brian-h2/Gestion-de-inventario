@@ -6,11 +6,11 @@ GET http://localhost:5279/tasksAll
 
 ###
 
-GET https://localhost:7174/Limpiar%20la%20casa
+GET https://localhost:7174/getTask/Limpiar%20la%20casa
 
 ###
 
-POST http://localhost:5279/createTask
+POST http://localhost:7174/createTask
 Content-Type: application/json
 {
   "IdTask":"132fdfb7-a245-42b2-9053-5e20b2a92062",
@@ -27,6 +27,10 @@ Content-Type: application/json
   "PriorityTask": 0,
   "TaskName": "Cuidar zaira"
 }
+
+###
+
+DELETE https://localhost:7174/deleteTask/Limpiar%20la%20casa
 
 
 
